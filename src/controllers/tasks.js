@@ -1,54 +1,38 @@
 const express = require("express");
-const { tasks, validate: validateTask } = require("../models/task");
+const { getTasks, addTask, updateTaskType , removeTask , validate: validateTask  } = require("../models/task");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  res.send(tasks);
+  res.send(await getTasks());
 });
 
 router.post("/", async (req, res) => {
   const { error } = validateTask(req.body);
   if (error) return res.status(404).send(error.details[0].message);
-  const newTask = {
-    id: tasks.length + 1,
+  let newTask = {
     title: req.body.title,
     desc: req.body.desc,
     type: req.body.type,
   };
-  tasks.push(newTask);
+  newTask= await addTask(newTask);
   res.status(200).send(newTask);
 });
 
 router.delete("/:id", async (req, res) => {
-  const task = tasks.find((x) => x.id == req.params.id);
-  if (!task) return res.status(404).send();
-  tasks.splice(
-    tasks.findIndex((x) => x == task),
-    1
-  );
+  const result = await removeTask(req.params.id);
+  if(result.n == 0) return res.status(404).send();
   res.status(200).send();
 });
 
 router.patch("/:id" , async (req , res) =>
 {
-  const task = tasks.find((x) => x.id == req.params.id);
-  
-  if (!task) return res.status(404).send();
-  const newTask = {
-    id: task.id,
-    title: task.title,
-    desc: task.desc,
+  const task = {
+    _id: req.params.id,
     type: req.body.type,
   };
-
-  tasks.splice(
-    tasks.findIndex((x) => x == task),
-    1
-    , 
-    newTask
-  );
+  const result = await updateTaskType(task)
+  if(result.n == 0) return res.status(404).send();
   res.status(200).send();
-
 })
 
 module.exports = router;

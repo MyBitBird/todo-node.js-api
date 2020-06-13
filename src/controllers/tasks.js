@@ -1,6 +1,7 @@
 const express = require("express");
 const { tasks, validate: validateTask } = require("../models/task");
 const router = express.Router();
+
 router.get("/", async (req, res) => {
   res.send(tasks);
 });

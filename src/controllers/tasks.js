@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
     id: tasks.length + 1,
     title: req.body.title,
     desc: req.body.desc,
-    status: req.body.status,
+    type: req.body.type,
   };
   tasks.push(newTask);
   res.status(200).send(newTask);
@@ -27,5 +27,27 @@ router.delete("/:id", async (req, res) => {
   );
   res.status(200).send();
 });
+
+router.patch("/:id" , async (req , res) =>
+{
+  const task = tasks.find((x) => x.id == req.params.id);
+  
+  if (!task) return res.status(404).send();
+  const newTask = {
+    id: task.id,
+    title: task.title,
+    desc: task.desc,
+    type: req.body.type,
+  };
+
+  tasks.splice(
+    tasks.findIndex((x) => x == task),
+    1
+    , 
+    newTask
+  );
+  res.status(200).send();
+
+})
 
 module.exports = router;

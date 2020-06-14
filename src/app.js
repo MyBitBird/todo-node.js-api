@@ -1,18 +1,6 @@
 const express = require("express");
-const tasks = require("./controllers/tasks.js");
-const home = require("./controllers/home.js");
-const mongoose = require("mongoose");
-const corsPolicy = require("./middleware/cors");
-
-
 const app = express();
-
-app.use(express.json());
-app.use(corsPolicy);
-
-app.use("/api/tasks/", tasks);
-app.get("/", home);
-
+require('./startup/routes')(app);
 require('./startup/db')();
 
 const port = process.env.PORT || 8080;

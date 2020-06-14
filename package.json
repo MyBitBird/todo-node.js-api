@@ -1,0 +1,17 @@
+{
+  "name": "ToDo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/app.js",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "helmet": "^3.23.0",
+    "mongoose": "^5.9.18",
+    "save": "^2.4.0"
+  }
+}

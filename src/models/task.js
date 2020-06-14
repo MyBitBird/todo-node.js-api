@@ -10,12 +10,12 @@ const taskSchema = new mongoose.Schema({
 const Task = mongoose.model("Task", taskSchema);
 
 const validate = (task) => {
-  const schema = {
+  const schema = Joi.object({
     title: Joi.string().min(3).max(50).required(),
     desc: Joi.string().required(),
     type: Joi.number().required(),
-  };
-  return Joi.validate(task, schema);
+  });
+  return schema.validate(task);
 };
 
 module.exports = { Task: Task ,validate: validate};

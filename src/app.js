@@ -1,8 +1,9 @@
 const express = require("express");
 const tasks = require("./controllers/tasks.js");
 const home = require("./controllers/home.js");
-const corsPolicy = require("./middleware/cors");
 const mongoose = require("mongoose");
+const corsPolicy = require("./middleware/cors");
+
 
 const app = express();
 

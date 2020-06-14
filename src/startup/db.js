@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const config = require('config');
+const config = require("config");
 
 module.exports = () => {
-    const db = config.get('db');
+  const mongoUrl = config.get("mongoUrl");
   mongoose
-    .connect(db,{useNewUrlParser: true})
-    .then(() => console.log(`Connected To ${db}..`))
-    .catch((err) => console.log("Connecting to Database failed..", err));
+    .connect(mongoUrl, { useNewUrlParser: true })
+    .then(() => console.log(`Connected To ${mongoUrl}..`))
+    .catch((err) => console.log("Connecting to Database failed.. ", err));
 };

@@ -16,7 +16,7 @@
     "@hapi/joi": "^17.1.1",
     "compression": "^1.7.4",
     "config": "^1.29.4",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "helmet": "^3.23.0",
     "mongoose": "^5.9.18",
     "save": "^2.4.0"
